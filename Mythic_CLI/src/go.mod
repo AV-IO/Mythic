@@ -1,4 +1,4 @@
-module github.com/MythicMeta/Mythic_CLI
+module github.com/its-a-feature/Mythic/Mythic_CLI
 
 go 1.18
 

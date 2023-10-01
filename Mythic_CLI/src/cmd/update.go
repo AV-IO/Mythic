@@ -11,7 +11,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/MythicMeta/Mythic_CLI/cmd/config"
+	"github.com/its-a-feature/Mythic/Mythic_CLI/cmd/config"
 	"github.com/spf13/cobra"
 	"golang.org/x/mod/semver"
 )

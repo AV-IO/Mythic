@@ -2,12 +2,10 @@ package cmd
 
 import (
 	"fmt"
-	"github.com/MythicMeta/Mythic_CLI/cmd/config"
-	"github.com/MythicMeta/Mythic_CLI/cmd/internal"
 	"os"
-)
 
-import (
+	"github.com/its-a-feature/Mythic/Mythic_CLI/cmd/config"
+	"github.com/its-a-feature/Mythic/Mythic_CLI/cmd/internal"
 	"github.com/spf13/cobra"
 )
 

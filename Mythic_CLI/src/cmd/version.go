@@ -2,11 +2,12 @@ package cmd
 
 import (
 	"fmt"
-	"github.com/MythicMeta/Mythic_CLI/cmd/config"
-	"github.com/spf13/cobra"
 	"os"
 	"path/filepath"
 	"strings"
+
+	"github.com/its-a-feature/Mythic/Mythic_CLI/cmd/config"
+	"github.com/spf13/cobra"
 )
 
 var versionCmd = &cobra.Command{

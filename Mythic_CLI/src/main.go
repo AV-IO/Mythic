@@ -3,7 +3,7 @@
 package main
 
 import (
-	"github.com/MythicMeta/Mythic_CLI/cmd"
+	"github.com/its-a-feature/Mythic/Mythic_CLI/cmd"
 )
 
 func main() {

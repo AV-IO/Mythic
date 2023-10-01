@@ -2,9 +2,10 @@ package cmd
 
 import (
 	"fmt"
-	"github.com/MythicMeta/Mythic_CLI/cmd/internal"
-	"github.com/spf13/cobra"
 	"os"
+
+	"github.com/its-a-feature/Mythic/Mythic_CLI/cmd/internal"
+	"github.com/spf13/cobra"
 )
 
 // installCmd represents the config command
