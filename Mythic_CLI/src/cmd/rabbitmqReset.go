@@ -9,8 +9,8 @@ import (
 var rabbitmqResetCmd = &cobra.Command{
 	Use:   "reset",
 	Short: "reset rabbitmq",
-	Long: `Run this command to stop mythic and delete the current RabbitMQ storage`,
-	Run: rabbitmqReset,
+	Long:  `Run this command to stop mythic and delete the current RabbitMQ storage`,
+	Run:   rabbitmqReset,
 }
 
 func init() {

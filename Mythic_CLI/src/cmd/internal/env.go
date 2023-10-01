@@ -98,6 +98,7 @@ func setMythicConfigDefaultValues() {
 	mythicEnv.SetDefault("webhook_default_custom_channel", "")
 
 }
+
 func parseMythicEnvironmentVariables() {
 	setMythicConfigDefaultValues()
 	mythicEnv.SetConfigName(".env")
@@ -158,6 +159,7 @@ func parseMythicEnvironmentVariables() {
 	}
 	writeMythicEnvironmentVariables()
 }
+
 func writeMythicEnvironmentVariables() {
 	c := mythicEnv.AllSettings()
 	// to make it easier to read and look at, get all the keys, sort them, and display variables in order
@@ -184,6 +186,7 @@ func writeMythicEnvironmentVariables() {
 	}
 	return
 }
+
 func GetConfigAllStrings() map[string]string {
 	c := mythicEnv.AllSettings()
 	// to make it easier to read and look at, get all the keys, sort them, and display variables in order
@@ -197,6 +200,7 @@ func GetConfigAllStrings() map[string]string {
 	}
 	return resultMap
 }
+
 func GetConfigStrings(args []string) map[string]string {
 	resultMap := make(map[string]string)
 	for i := 0; i < len(args[0:]); i++ {
@@ -210,6 +214,7 @@ func GetConfigStrings(args []string) map[string]string {
 	}
 	return resultMap
 }
+
 func SetConfigStrings(key string, value string) {
 	if strings.ToLower(value) == "true" {
 		mythicEnv.Set(key, true)
@@ -221,6 +226,7 @@ func SetConfigStrings(key string, value string) {
 	mythicEnv.Get(key)
 	writeMythicEnvironmentVariables()
 }
+
 func Initialize() {
 	parseMythicEnvironmentVariables()
 	writeMythicEnvironmentVariables()

@@ -5,9 +5,6 @@ import (
 	"crypto/tls"
 	"encoding/binary"
 	"fmt"
-	"github.com/docker/docker/api/types"
-	"github.com/docker/docker/client"
-	"github.com/streadway/amqp"
 	"log"
 	"net"
 	"net/http"
@@ -18,6 +15,10 @@ import (
 	"strings"
 	"text/tabwriter"
 	"time"
+
+	"github.com/docker/docker/api/types"
+	"github.com/docker/docker/client"
+	"github.com/streadway/amqp"
 )
 
 func imageExists(containerName string) bool {
@@ -39,6 +40,7 @@ func imageExists(containerName string) bool {
 	}
 	return false
 }
+
 func TestMythicConnection() {
 	webAddress := "127.0.0.1"
 	if mythicEnv.GetString("NGINX_HOST") == "mythic_nginx" {
@@ -86,6 +88,7 @@ func TestMythicConnection() {
 	GetLogs("mythic_server", "500")
 	os.Exit(1)
 }
+
 func TestMythicRabbitmqConnection() {
 	rabbitmqAddress := "127.0.0.1"
 	rabbitmqPort := mythicEnv.GetString("RABBITMQ_PORT")
@@ -125,6 +128,7 @@ func TestMythicRabbitmqConnection() {
 
 	}
 }
+
 func TestPorts() error {
 	// go through the different services in mythicEnv and check to make sure their ports aren't already used by trying to open them
 	//MYTHIC_SERVER_HOST:MYTHIC_SERVER_PORT
@@ -194,6 +198,7 @@ func TestPorts() error {
 	}
 	return nil
 }
+
 func PrintMythicConnectionInfo() {
 	w := new(tabwriter.Writer)
 	w.Init(os.Stdout, 0, 8, 2, '\t', 0)
@@ -386,6 +391,7 @@ func Status(verbose bool) {
 	fmt.Printf("[*] If you are using a remote PayloadType or C2Profile, they will need certain environment variables to properly connect to Mythic.\n")
 	fmt.Printf("    Use 'sudo ./mythic-cli config service' for configs for these services.\n")
 }
+
 func GetLogs(containerName string, numLogs string) {
 	cli, err := client.NewClientWithOpts(client.FromEnv, client.WithAPIVersionNegotiation())
 	if err != nil {
@@ -427,6 +433,7 @@ func GetLogs(containerName string, numLogs string) {
 		fmt.Println("[-] No containers running")
 	}
 }
+
 func ListServices() {
 	cli, err := client.NewClientWithOpts(client.FromEnv, client.WithAPIVersionNegotiation())
 	if err != nil {

@@ -4,15 +4,16 @@ import (
 	"crypto/tls"
 	"errors"
 	"fmt"
-	"github.com/MythicMeta/Mythic_CLI/cmd/config"
-	"github.com/spf13/cobra"
-	"golang.org/x/mod/semver"
 	"io"
 	"net/http"
 	"os"
 	"path/filepath"
 	"strings"
 	"time"
+
+	"github.com/MythicMeta/Mythic_CLI/cmd/config"
+	"github.com/spf13/cobra"
+	"golang.org/x/mod/semver"
 )
 
 // configCmd represents the config command
@@ -67,6 +68,7 @@ func updateCheck(cmd *cobra.Command, args []string) {
 	}
 
 }
+
 func checkMythicVersion(client *http.Client, urlBase string) (needsUpdate bool, err error) {
 	targetURL := urlBase + "/VERSION"
 	if req, err := http.NewRequest("GET", targetURL, nil); err != nil {
@@ -125,6 +127,7 @@ func checkMythicVersion(client *http.Client, urlBase string) (needsUpdate bool, 
 		}
 	}
 }
+
 func checkUIVersion(client *http.Client, urlBase string) (needsUpdate bool, err error) {
 	targetURL := urlBase + "/MythicReactUI/src/index.js"
 	if req, err := http.NewRequest("GET", targetURL, nil); err != nil {
@@ -169,6 +172,7 @@ func checkUIVersion(client *http.Client, urlBase string) (needsUpdate bool, err 
 		}
 	}
 }
+
 func getUIVersionFromFileContents(contents string) string {
 	fileLines := strings.Split(contents, "\n")
 	for _, line := range fileLines {
@@ -180,6 +184,7 @@ func getUIVersionFromFileContents(contents string) string {
 	}
 	return "Failed to find version"
 }
+
 func checkCLIVersion(client *http.Client, urlBase string) (needsUpdate bool, err error) {
 	targetURL := urlBase + "/Mythic_CLI/src/cmd/config/vars.go"
 	if req, err := http.NewRequest("GET", targetURL, nil); err != nil {
@@ -224,6 +229,7 @@ func checkCLIVersion(client *http.Client, urlBase string) (needsUpdate bool, err
 		}
 	}
 }
+
 func getCLIVersionFromFileContents(contents string) string {
 	fileLines := strings.Split(contents, "\n")
 	for _, line := range fileLines {

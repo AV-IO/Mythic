@@ -53,6 +53,7 @@ func runGitClone(args []string) error {
 	}
 	return nil
 }
+
 func runGitLsRemote(args []string) (err error) {
 	if lookPath, err := exec.LookPath("git"); err != nil {
 		fmt.Printf("[-] git is not installed or not available in the current PATH variable")

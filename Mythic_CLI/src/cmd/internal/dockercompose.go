@@ -36,6 +36,7 @@ func isServiceRunning(service string) bool {
 	}
 	return false
 }
+
 func addMythicServiceDockerComposeEntry(service string) {
 	var curConfig = viper.New()
 	curConfig.SetConfigName("docker-compose")
@@ -572,6 +573,7 @@ func addMythicServiceDockerComposeEntry(service string) {
 	curConfig.Set("version", "2.4")
 	curConfig.WriteConfig()
 }
+
 func removeMythicServiceDockerComposeEntry(service string) {
 	var curConfig = viper.New()
 	curConfig.SetConfigName("docker-compose")
@@ -743,6 +745,7 @@ func AddDockerComposeEntry(service string, additionalConfigs map[string]interfac
 	}
 	return nil
 }
+
 func RemoveDockerComposeEntry(service string) error {
 	// add c2/payload [name] as type [group] to the main yaml file
 	var curConfig = viper.New()
@@ -843,6 +846,7 @@ func runDockerCompose(args []string) error {
 	}
 	return nil
 }
+
 func runDocker(args []string) (string, error) {
 	if lookPath, err := exec.LookPath("docker"); err != nil {
 		log.Fatalf("[-] docker is not installed or available in the current PATH")
@@ -886,6 +890,7 @@ func runDocker(args []string) (string, error) {
 	}
 	return "", nil
 }
+
 func GetAllExistingNonMythicServiceNames() ([]string, error) {
 	// get all services that exist within the loaded config
 	groupNameConfig := viper.New()
@@ -911,6 +916,7 @@ func GetAllExistingNonMythicServiceNames() ([]string, error) {
 	}
 	return containerList, nil
 }
+
 func GetCurrentMythicServiceNames() ([]string, error) {
 	groupNameConfig := viper.New()
 	groupNameConfig.SetConfigName("docker-compose")
@@ -967,6 +973,7 @@ func getBuildArguments() []string {
 	}
 	return args
 }
+
 func getMythicEnvList() []string {
 	env := mythicEnv.AllSettings()
 	var envList []string

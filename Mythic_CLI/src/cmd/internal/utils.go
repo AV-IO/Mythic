@@ -9,7 +9,6 @@ import (
 	"crypto/x509/pkix"
 	"encoding/pem"
 	"fmt"
-	"golang.org/x/mod/semver"
 	"io"
 	"io/fs"
 	"log"
@@ -19,6 +18,8 @@ import (
 	"path/filepath"
 	"strings"
 	"time"
+
+	"golang.org/x/mod/semver"
 )
 
 func generateRandomPassword(pwLength int) string {
@@ -33,6 +34,7 @@ func generateRandomPassword(pwLength int) string {
 	}
 	return b.String()
 }
+
 func getCwdFromExe() string {
 	exe, err := os.Executable()
 	if err != nil {
@@ -40,6 +42,7 @@ func getCwdFromExe() string {
 	}
 	return filepath.Dir(exe)
 }
+
 func stringInSlice(value string, list []string) bool {
 	for _, e := range list {
 		if e == value {
@@ -48,6 +51,7 @@ func stringInSlice(value string, list []string) bool {
 	}
 	return false
 }
+
 func RemoveStringFromSliceNoOrder(source []string, str string) []string {
 
 	for index, value := range source {
@@ -189,6 +193,7 @@ func checkCerts(certPath string, keyPath string) error {
 	}
 	return nil
 }
+
 func generateCerts() error {
 	if !dirExists(filepath.Join(getCwdFromExe(), "nginx-docker", "ssl")) {
 		err := os.MkdirAll(filepath.Join(getCwdFromExe(), "nginx-docker", "ssl"), os.ModePerm)

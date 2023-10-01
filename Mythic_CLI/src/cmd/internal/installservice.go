@@ -265,6 +265,7 @@ func InstallFolder(installPath string, overWrite bool) error {
 	}
 	return nil
 }
+
 func InstallService(url string, branch string, overWrite bool) error {
 	// make our temp directory to clone into
 	workingPath := getCwdFromExe()
@@ -300,6 +301,7 @@ func InstallService(url string, branch string, overWrite bool) error {
 		return nil
 	}
 }
+
 func installServiceByName(service string) error {
 	// just have a service name, check MythicAgents, MythicC2Profiles, or error
 	agentURL := fmt.Sprintf("https://github.com/MythicAgents/%s", service)
@@ -317,6 +319,7 @@ func installServiceByName(service string) error {
 		return InstallService(agentURL, "", true)
 	}
 }
+
 func InstallMythicSyncFolder(installPath string) error {
 	workingPath := getCwdFromExe()
 	viper.SetConfigName("docker-compose")
@@ -358,6 +361,7 @@ func InstallMythicSyncFolder(installPath string) error {
 	}
 	return nil
 }
+
 func InstallMythicSync(url string, branch string) error {
 	// make our temp directory to clone into
 	workingPath := getCwdFromExe()
@@ -387,6 +391,7 @@ func InstallMythicSync(url string, branch string) error {
 	return InstallMythicSyncFolder(filepath.Join(workingPath, "tmp"))
 
 }
+
 func UninstallMythicSync() {
 	workingPath := getCwdFromExe()
 	service := "mythic_sync"
@@ -406,6 +411,7 @@ func UninstallMythicSync() {
 	}
 	fmt.Printf("[+] Successfully uninstalled mythic_sync\n")
 }
+
 func UninstallService(services []string) {
 	workingPath := getCwdFromExe()
 	for _, service := range services {

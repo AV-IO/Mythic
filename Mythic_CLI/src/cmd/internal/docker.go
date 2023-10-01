@@ -4,13 +4,14 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"github.com/docker/docker/api/types"
-	"github.com/docker/docker/client"
 	"io"
 	"log"
 	"os"
 	"path/filepath"
 	"strings"
+
+	"github.com/docker/docker/api/types"
+	"github.com/docker/docker/client"
 )
 
 var MythicPossibleServices = []string{
@@ -52,6 +53,7 @@ func updateEnvironmentVariables(originalList []string, updates []string) []strin
 	}
 	return finalList
 }
+
 func GetIntendedMythicServiceNames() ([]string, error) {
 	// need to see about adding services back in if they were for remote hosts before
 	containerList := []string{}
@@ -113,6 +115,7 @@ func GetIntendedMythicServiceNames() ([]string, error) {
 	}
 	return containerList, nil
 }
+
 func getElementsOnDisk() ([]string, error) {
 	var agentsOnDisk []string
 	installedServicesFilePath := filepath.Join(getCwdFromExe(), InstalledServicesFolder)
@@ -133,6 +136,7 @@ func getElementsOnDisk() ([]string, error) {
 	}
 	return agentsOnDisk, nil
 }
+
 func DockerStart(containers []string) error {
 	// first stop everything that's currently running
 	buildArguments = getBuildArguments()
@@ -238,6 +242,7 @@ func DockerStart(containers []string) error {
 		return nil
 	}
 }
+
 func DockerStop(containers []string) error {
 	if dockerComposeContainers, err := GetAllExistingNonMythicServiceNames(); err != nil {
 		return err
@@ -263,6 +268,7 @@ func DockerStop(containers []string) error {
 		}
 	}
 }
+
 func DockerBuild(containers []string) error {
 	if len(containers) == 0 {
 		return nil
@@ -282,6 +288,7 @@ func DockerBuild(containers []string) error {
 		return nil
 	}
 }
+
 func DockerRemoveImages() error {
 	ctx := context.Background()
 	cli, err := client.NewClientWithOpts(client.FromEnv, client.WithAPIVersionNegotiation())
@@ -306,6 +313,7 @@ func DockerRemoveImages() error {
 	}
 	return nil
 }
+
 func DockerRemoveContainers(containers []string) error {
 	if err := runDockerCompose(append([]string{"rm", "-s", "-v", "-f"}, containers...)); err != nil {
 		return err
@@ -315,12 +323,14 @@ func DockerRemoveContainers(containers []string) error {
 		return nil
 	}
 }
+
 func DockerBuildReactUI() error {
 	if _, err := runDocker([]string{"exec", "mythic_react", "/bin/sh", "-c", "npm run react-build"}); err != nil {
 		return err
 	}
 	return nil
 }
+
 func DockerSave(containers []string) error {
 	if err := generateSavedImageFolder(); err != nil {
 		return errors.New(fmt.Sprintf("[-] Failed to generate folder to save images: %v\n", err))
@@ -340,7 +350,7 @@ func DockerSave(containers []string) error {
 		}
 		savedImagePath := filepath.Join(getCwdFromExe(), "saved_images", "mythic_save.tar")
 		finalSavedContainers := []string{}
-		for i, _ := range savedContainers {
+		for i := range savedContainers {
 			if imageExists(savedContainers[i]) {
 				containerName := fmt.Sprintf("%s:latest", savedContainers[i])
 				finalSavedContainers = append(finalSavedContainers, containerName)
@@ -364,6 +374,7 @@ func DockerSave(containers []string) error {
 		return nil
 	}
 }
+
 func DockerLoad() error {
 	savedImagePath := filepath.Join(getCwdFromExe(), "saved_images", "mythic_save.tar")
 	if cli, err := client.NewClientWithOpts(client.FromEnv, client.WithAPIVersionNegotiation()); err != nil {
@@ -377,6 +388,7 @@ func DockerLoad() error {
 		return nil
 	}
 }
+
 func DockerHealth(containers []string) {
 	for _, container := range containers {
 		outputString, err := runDocker([]string{"inspect", "--format", "{{json .State.Health }}", container})

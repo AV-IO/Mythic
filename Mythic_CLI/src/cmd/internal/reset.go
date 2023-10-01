@@ -19,6 +19,7 @@ func DatabaseReset() {
 		fmt.Printf("[+] Successfully reset datbase files\n")
 	}
 }
+
 func RabbitmqReset(explicitCall bool) {
 	if explicitCall {
 		fmt.Printf("[*] Stopping Mythic\n")
