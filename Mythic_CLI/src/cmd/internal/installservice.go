@@ -2,7 +2,6 @@ package internal
 
 import (
 	"fmt"
-	"io/ioutil"
 	"log"
 	"os"
 	"path/filepath"
@@ -30,7 +29,7 @@ func InstallFolder(installPath string, overWrite bool) error {
 		}
 		if !config.GetBool("exclude_payload_type") {
 			// handle the payload type copying here
-			files, err := ioutil.ReadDir(filepath.Join(installPath, "Payload_Type"))
+			files, err := os.ReadDir(filepath.Join(installPath, "Payload_Type"))
 			if err != nil {
 				fmt.Printf("[-] Failed to list contents of new Payload_Type folder: %v\n", err)
 				return err
@@ -90,7 +89,7 @@ func InstallFolder(installPath string, overWrite bool) error {
 		}
 		if !config.GetBool("exclude_c2_profiles") {
 			// handle the c2 profile copying here
-			files, err := ioutil.ReadDir(filepath.Join(installPath, "C2_Profiles"))
+			files, err := os.ReadDir(filepath.Join(installPath, "C2_Profiles"))
 			if err != nil {
 				fmt.Printf("[-] Failed to list contents of C2_Profiles folder from clone\n")
 				return err
@@ -142,7 +141,7 @@ func InstallFolder(installPath string, overWrite bool) error {
 		}
 		if !config.GetBool("exclude_documentation_payload") {
 			// handle payload documentation copying here
-			files, err := ioutil.ReadDir(filepath.Join(installPath, "documentation-payload"))
+			files, err := os.ReadDir(filepath.Join(installPath, "documentation-payload"))
 			if err != nil {
 				fmt.Printf("[-] Failed to list contents of documentation_payload folder from clone: %v\n", err)
 			} else {
@@ -181,7 +180,7 @@ func InstallFolder(installPath string, overWrite bool) error {
 		}
 		if !config.GetBool("exclude_documentation_c2") {
 			// handle the c2 documentation copying here
-			files, err := ioutil.ReadDir(filepath.Join(installPath, "documentation-c2"))
+			files, err := os.ReadDir(filepath.Join(installPath, "documentation-c2"))
 			if err != nil {
 				fmt.Printf("[-] Failed to list contents of documentation_payload folder from clone")
 			} else {
@@ -220,7 +219,7 @@ func InstallFolder(installPath string, overWrite bool) error {
 		}
 		if !config.GetBool("exclude_documentation_wrapper") {
 			// handle payload documentation copying here
-			files, err := ioutil.ReadDir(filepath.Join(installPath, "documentation-wrapper"))
+			files, err := os.ReadDir(filepath.Join(installPath, "documentation-wrapper"))
 			if err != nil {
 				fmt.Printf("[-] Failed to list contents of documentation-wrapper folder from clone: %v\n", err)
 			} else {
